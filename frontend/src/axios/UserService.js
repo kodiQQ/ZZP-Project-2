@@ -54,6 +54,66 @@ class UserService{
         return tasks.data.taskEntityList
     }
 
+
+    static async addTasks(token,title,description,statusId,categoryId){
+        try {
+            // Wysyłanie żądania POST z odpowiednimi danymi
+            await axios.post(
+                `${UserService.BASE_URL}/api/adminuser/add_task`,
+                {
+                    title: title,
+                    description: description,
+                    customStatusId: statusId,
+                    categoryId: categoryId
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            // Zwrócenie listy zadań
+        } catch (error) {
+            console.error("Błąd podczas dodawania zadania:", error);
+            throw error; // Opcjonalnie wyrzucenie błędu, jeśli coś pójdzie nie tak
+        }
+    }
+
+    static async updateTask(token,taskid,title,description,statusId,categoryId){
+        try {
+            console.log("taskid");
+            console.log(taskid);
+            // Wysyłanie żądania POST z odpowiednimi danymi
+            await axios.put(
+                `${UserService.BASE_URL}/api/adminuser/putTask/${taskid}`,
+                {
+                    title: title,
+                    description: description,
+                    customStatusId: statusId,
+                    categoryId: categoryId
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            // Zwrócenie listy zadań
+        } catch (error) {
+            console.error("Błąd podczas dodawania zadania:", error);
+            throw error; // Opcjonalnie wyrzucenie błędu, jeśli coś pójdzie nie tak
+        }
+    }
+
+    static async deleteTask(token,id){
+        await axios.delete(`${UserService.BASE_URL}/api/adminuser/deleteTask/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+    }
+
     static async getCategories(token){
         let tasks = await axios.get(`${UserService.BASE_URL}/api/adminuser/getAllCategories`, {
             headers: {
@@ -71,6 +131,117 @@ class UserService{
         });
         return customStatuses.data.customStatusEntityList
     }
+    static async addStatus(token,name){
+        try {
+            // Wysyłanie żądania POST z odpowiednimi danymi
+            await axios.post(
+                `${UserService.BASE_URL}/api/adminuser/add_status`,
+                {
+                    name: name
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            // Zwrócenie listy zadań
+        } catch (error) {
+            console.error("Błąd podczas dodawania zadania:", error);
+            throw error; // Opcjonalnie wyrzucenie błędu, jeśli coś pójdzie nie tak
+        }
+    }
+
+    static async updateStatus(token,taskid,name){
+        try {
+            console.log("taskid");
+            console.log(taskid);
+            // Wysyłanie żądania POST z odpowiednimi danymi
+            await axios.put(
+                `${UserService.BASE_URL}/api/adminuser/putCustomStatus/${taskid}`,
+                {
+                    name: name
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            // Zwrócenie listy zadań
+        } catch (error) {
+            console.error("Błąd podczas dodawania zadania:", error);
+            throw error; // Opcjonalnie wyrzucenie błędu, jeśli coś pójdzie nie tak
+        }
+    }
+
+    static async deleteStatus(token,id){
+        await axios.delete(`${UserService.BASE_URL}/api/adminuser/deleteCustomStatus/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+    }
+
+
+
+
+    static async addCategory(token,name){
+        try {
+            // Wysyłanie żądania POST z odpowiednimi danymi
+            await axios.post(
+                `${UserService.BASE_URL}/api/adminuser/add_category`,
+                {
+                    name: name
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            // Zwrócenie listy zadań
+        } catch (error) {
+            console.error("Błąd podczas dodawania zadania:", error);
+            throw error; // Opcjonalnie wyrzucenie błędu, jeśli coś pójdzie nie tak
+        }
+    }
+
+    static async updateCategory(token,categoryid,name){
+        try {
+            console.log("taskid");
+            console.log(categoryid);
+            // Wysyłanie żądania POST z odpowiednimi danymi
+            await axios.put(
+                `${UserService.BASE_URL}/api/adminuser/putCategory/${categoryid}`,
+                {
+                    name: name
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            // Zwrócenie listy zadań
+        } catch (error) {
+            console.error("Błąd podczas dodawania zadania:", error);
+            throw error; // Opcjonalnie wyrzucenie błędu, jeśli coś pójdzie nie tak
+        }
+    }
+
+    static async deleteCategory(token,id){
+        await axios.delete(`${UserService.BASE_URL}/api/adminuser/deleteCategory/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+    }
+
+
+
 
     static async handleCallback(key) {
         // console.log("wykonanie handlecallback")

@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,9 +78,18 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Override
     public TaskListDto getAllTasks(OurUsersEntity ourUsersEntity){
         System.out.println(ourUsersEntity.getId());
-        List<TaskEntity> tasks = taskRepo.findByUserId(ourUsersEntity.getId());
-        tasks.forEach(task -> System.out.println(task.toString()));
-        TaskListDto taskListDto= TaskListDto.builder().taskEntityList(tasks).build();
+        System.out.println("22222222");
+//        List<TaskEntity> tasks = taskRepo.findByUserId(ourUsersEntity.getId());
+        List<TaskEntity> tasks=taskRepo.findAll();
+        System.out.println(tasks.size());
+        ArrayList<TaskEntity> usersTasks=new ArrayList();
+        for(TaskEntity taskEntity:tasks){
+            if(taskEntity.getUser().getId()==ourUsersEntity.getId()){
+                usersTasks.add(taskEntity);
+            }
+        }
+//        tasks.forEach(task -> System.out.println(task.toString()));
+        TaskListDto taskListDto= TaskListDto.builder().taskEntityList(usersTasks).build();
         return taskListDto;
     }
 
@@ -131,7 +141,17 @@ public class AdminUserServiceImpl implements AdminUserService {
         TaskDto currentTaskDto=new TaskDto();
 
         try{
-            TaskEntity taskEntity=taskMapper.mapFrom(taskDto);
+//            TaskEntity taskEntity=taskMapper.mapFrom(taskDto);
+            CustomStatusEntity customStatusEntity=customStatusRepo.getById(taskDto.getCustomStatusId());
+            CategoryEntity categoryEntity=categoryRepo.getById(taskDto.getCategoryId());
+            TaskEntity taskEntity=TaskEntity.builder()
+                    .id(id)
+                    .title(taskDto.getTitle())
+                    .description(taskDto.getDescription())
+                    .customStatus(customStatusEntity)
+                    .category(categoryEntity)
+                    .user(ourUsersEntity)
+                    .build();
             TaskEntity temporaryTaskEntity=taskRepo.getById(id);
             //sprawdzenie czy task należy do usera:
             if (ourUsersEntity.getId()==temporaryTaskEntity.getUser().getId()){
