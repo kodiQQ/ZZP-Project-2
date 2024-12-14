@@ -1,0 +1,83 @@
+.task-table-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-table th, .task-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.task-table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.task-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.task-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.edit-button, .delete-button, .add-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.add-button {
+    background-color: #28a745;
+    color: white;
+    display: block;
+    margin: 20px auto;
+}
+
+.edit-button:hover, .delete-button:hover, .add-button:hover {
+    opacity: 0.9;
+}
+
+
+.add-form {
+    position: fixed; /* Ustawia element jako niezależny od układu strony */
+    top: 50%; /* Wyrównanie do środka */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Wycentrowanie */
+    background-color: white; /* Tło formularza */
+    padding: 20px; /* Margines wewnętrzny */
+    border-radius: 8px; /* Zaokrąglenie rogów */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efekt cienia */
+    z-index: 1000; /* Element na pierwszym planie */
+}
+
+.add-form::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Półprzezroczyste tło */
+    z-index: -1; /* Tło pozostaje za formularzem */
+}

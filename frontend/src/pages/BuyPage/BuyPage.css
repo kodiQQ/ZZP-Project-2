@@ -1,0 +1,208 @@
+.styled-table {
+    margin-top: 20px; /* Odstęp od elementu nad tabelą */
+    width: 100%; /* Dopasowanie do szerokości kontenera */
+    border-collapse: collapse;
+    border: 2px solid #333; /* Ciemna obramówka wokół tabeli */
+    border-radius: 10px; /* Zaokrąglenie rogów tabeli */
+    overflow: hidden; /* Ukrycie obramowania w rogach */
+  }
+
+  .styled-table th {
+    background-color: #FFD700; /* Żółty kolor dla nagłówka */
+    color: #333; /* Ciemny kolor tekstu */
+    padding: 10px;
+    text-align: left;
+    border: 2px solid #333; /* Ciemna obramówka nagłówków */
+    font-weight: bold; /* Pogrubienie czcionki nagłówków */
+  }
+
+  .styled-table td {
+    color: #333; /* Ciemny kolor tekstu */
+    padding: 10px;
+    border: 2px solid #333; /* Ciemna obramówka komórek */
+    font-weight: bold; /* Pogrubienie czcionki komórek */
+  }
+
+  .styled-table tr:nth-child(odd) {
+    background-color: #f5f5f5; /* Jasno szary kolor dla nieparzystych wierszy */
+  }
+
+  .styled-table tr:nth-child(even) {
+    background-color: #ffffff; /* Biały kolor dla parzystych wierszy (opcjonalnie) */
+  }
+
+  .buy-buttons {
+    display: flex;
+    justify-content: flex-end; /* Ustawia pozycję po prawej stronie */
+    gap: 10px; /* Odstęp między przyciskami */
+    margin: 1%;
+  }
+
+  .form-style{
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+  }
+
+
+  .selected-skin:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+
+
+  .selected-skin {
+    display: grid;
+    grid-template-rows: 1fr 1.5fr 1fr;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px; /* Opcjonalne odstępy wewnętrzne */
+    margin: 5px; /* Opcjonalne odstępy zewnętrzne */
+    box-sizing: border-box; /* Aby padding i border były wliczane w wymiary elementu */
+    height: 90%;
+  }
+  .ST {
+    color: orange;
+  }
+
+
+  .selected-skin img {
+    max-width: 100%; /* Utrzymuje responsywność obrazka */
+    height: auto; /* Utrzymuje proporcje obrazka */
+    border-radius: 4px;
+    margin-bottom: 8px; /* Możesz dostosować margines dolny */
+  }
+
+  /* Styl głównego kontenera */
+  .offer-container {
+    background-color: #2b2b2b;       /* Ciemne tło */
+    color: #e5e5e5;                  /* Jasnoszary tekst */
+    border-radius: 10px;             /* Zaokrąglone rogi */
+    padding: 20px;                   /* Odstęp wewnętrzny */
+    width: 66%;                     /* Pełna szerokość */
+    /* max-width: 800px;                 */
+    margin: 0 auto;                  /* Wyśrodkowanie na stronie */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Delikatny cień */
+  }
+
+  /* Styl nagłówka */
+  .offer-header {
+    display: flex;
+    justify-content: space-between;  /* Rozdziela elementy na końce */
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  /* Styl kontenera treści */
+  .offer-content {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* Styl nagłówka oferty */
+  .offer-content h2 {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  /* Styl tekstu w ofercie */
+  .offer-content p {
+    margin: 5px 0 0;
+    font-size: 1em;
+    color: #a5a5a5;                  /* Lżejszy szary kolor dla opisu */
+  }
+
+
+  /* Styl ikony koszyka */
+.icon-basket {
+  margin-left: 5px;
+  font-size: 1em;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+@media (max-width: 510px) {
+  .grid-container {
+    margin-left: 0; /* Usuń marginesy przy bardzo małych ekranach */
+    margin-right: 0;
+  }
+}
+
+
+.square {
+  background-color: #333;
+  /* border: 1px solid #ddd; */
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex; /* Użycie flexbox */
+  flex-direction: column; /* Ustawia elementy w kolumnie */
+  justify-content: space-between; /* Równomierne rozłożenie przestrzeni między elementami */
+  height: 91%; /* Stała wysokość dla kontenera */
+}
+
+.square:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.square img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 4px; /* Zmniejszenie odstępu poniżej obrazka */
+}
+
+.square p {
+  margin: 4px 0; /* Zmniejszenie marginesu górnego i dolnego dla elementów <p> */
+  font-size: 14px;
+  color: #333;
+}
+
+.selected-skins {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+  color: yellow;
+  max-height: 25vh; /* Ustaw pożądaną wysokość */
+  min-height: 25vh;
+  overflow-y: auto; /* Dodaje pionowy pasek przewijania */
+  border: 1px solid #ccc; /* Opcjonalnie: dodanie obramowania */
+  padding: 10px; /* Opcjonalnie: dodanie odstępu wewnętrznego */
+
+}
+
+.form-style-and-confirm label{
+  font-size: 22px;
+
+}
+
+.form-style-and-confirm label input{
+  margin-top:7px;
+}
+
+
+/* Styl dla kontenera grid */
+
+
+/* Styl dla pojedynczego div.square */
+.square {
+  position: relative; /* Ważne, aby komunikat był umieszczony względem tego div */
+  background-color: #333; /* Opcjonalnie, aby wyróżnić tło */
+  padding: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px; /* Możesz zmienić wysokość, jeśli potrzebujesz */
+}
