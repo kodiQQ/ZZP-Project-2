@@ -8,8 +8,8 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
+        // event.preventDefault();
         setError(null);
         UserService.register(register, password);
 
@@ -17,10 +17,10 @@ const RegisterForm = () => {
 
     return (
         <div style={{maxWidth: '400px', margin: '0 auto', padding: '1rem'}}>
-            <h2>Register</h2>
+
             <form onSubmit={handleSubmit}>
                 <div style={{marginBottom: '1rem'}}>
-                    <label htmlFor="register" style={{display: 'block', marginBottom: '.5rem'}}>Register:</label>
+                    <label htmlFor="register" style={{display: 'block', marginBottom: '.5rem'}}>Email:</label>
                     <input
                         type="text"
                         id="register"

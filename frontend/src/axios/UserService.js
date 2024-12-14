@@ -271,79 +271,98 @@ class UserService{
 
     }
 
-    static async register(userData, token){
-        try{
-            const response = await axios.post(`${UserService.BASE_URL}/auth/register`, userData, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
-        }catch(err){
-            throw err;
+    static async register(email,password){
+        try {
+            // Wysyłanie żądania POST z odpowiednimi danymi
+            await axios.post(
+                `${UserService.BASE_URL}/api/auth/register`,
+                {
+                    email:email,
+                    password:password
+                },
+
+            );
+            // Zwrócenie listy zadań
+        } catch (error) {
+            console.error("Błąd podczas dodawania zadania:", error);
+            throw error; // Opcjonalnie wyrzucenie błędu, jeśli coś pójdzie nie tak
         }
     }
 
-    static async getAllUsers(token){
+    static async getUser(token){
         try{
-            const response = await axios.get(`${UserService.BASE_URL}/admin/get-all-users`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
-        }catch(err){
-            throw err;
-        }
-    }
-
-
-    static async getYourProfile(token){
-        try{
-            const response = await axios.get(`${UserService.BASE_URL}/adminuser/get-profile`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
-        }catch(err){
-            throw err;
-        }
-    }
-
-    static async getUserById(userId, token){
-        try{
-            const response = await axios.get(`${UserService.BASE_URL}/admin/get-users/${userId}`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
-        }catch(err){
-            throw err;
-        }
-    }
-
-    static async deleteUser(userId, token){
-        try{
-            const response = await axios.delete(`${UserService.BASE_URL}/admin/delete/${userId}`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
+                const response = await axios.get(`${UserService.BASE_URL}/api/adminuser/getUser`,
+                {
+                    headers: {Authorization: `Bearer ${token}`}
+                })
+                return response.data.ourUsersEntity.email;
         }catch(err){
             throw err;
         }
     }
 
 
-    static async updateUser(userId, userData, token){
-        try{
-            const response = await axios.put(`${UserService.BASE_URL}/admin/update/${userId}`, userData,
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
-        }catch(err){
-            throw err;
-        }
-    }
+    // static async getAllUsers(token){
+    //     try{
+    //         const response = await axios.get(`${UserService.BASE_URL}/admin/get-all-users`,
+    //         {
+    //             headers: {Authorization: `Bearer ${token}`}
+    //         })
+    //         return response.data;
+    //     }catch(err){
+    //         throw err;
+    //     }
+    // }
+    //
+    //
+    // static async getYourProfile(token){
+    //     try{
+    //         const response = await axios.get(`${UserService.BASE_URL}/adminuser/get-profile`,
+    //         {
+    //             headers: {Authorization: `Bearer ${token}`}
+    //         })
+    //         return response.data;
+    //     }catch(err){
+    //         throw err;
+    //     }
+    // }
+    //
+    // static async getUserById(userId, token){
+    //     try{
+    //         const response = await axios.get(`${UserService.BASE_URL}/admin/get-users/${userId}`,
+    //         {
+    //             headers: {Authorization: `Bearer ${token}`}
+    //         })
+    //         return response.data;
+    //     }catch(err){
+    //         throw err;
+    //     }
+    // }
+    //
+    // static async deleteUser(userId, token){
+    //     try{
+    //         const response = await axios.delete(`${UserService.BASE_URL}/admin/delete/${userId}`,
+    //         {
+    //             headers: {Authorization: `Bearer ${token}`}
+    //         })
+    //         return response.data;
+    //     }catch(err){
+    //         throw err;
+    //     }
+    // }
+
+
+    // static async updateUser(userId, userData, token){
+    //     try{
+    //         const response = await axios.put(`${UserService.BASE_URL}/admin/update/${userId}`, userData,
+    //         {
+    //             headers: {Authorization: `Bearer ${token}`}
+    //         })
+    //         return response.data;
+    //     }catch(err){
+    //         throw err;
+    //     }
+    // }
 
     /**AUTHENTICATION CHECKER */
     static logout(){

@@ -47,22 +47,30 @@ public class AdminUserServiceImpl implements AdminUserService {
 
     @Override
     public  TaskDto add_task(TaskDto taskDto, OurUsersEntity ourUsersEntity) {
+        TaskEntity taskEntity=new TaskEntity();
         System.out.println("11111111111111111111111111");
         CategoryEntity categoryEntity=categoryRepo.getById(taskDto.getCategoryId());
-        TaskEntity taskEntity=TaskEntity.builder()
-                .user(ourUsersEntity)
-                .title(taskDto.getTitle())
-                .description(taskDto.getDescription())
-                .customStatus(customStatusRepo.getById(taskDto.getCustomStatusId()))
-                .category(categoryEntity)
-                .user(ourUsersEntity)
-                .build();
-        System.out.println("2222222222222222222222");
+        CustomStatusEntity customStatusEntity=customStatusRepo.getById(taskDto.getCustomStatusId());
+        if(categoryEntity.getUser().getId()!=ourUsersEntity.getId()||customStatusEntity.getUser().getId()!=ourUsersEntity.getId()){
+            System.out.println("Podano id kategorii lub statusu niewłaściwego usera");
+        }else{
+            taskEntity=TaskEntity.builder()
+                    .user(ourUsersEntity)
+                    .title(taskDto.getTitle())
+                    .description(taskDto.getDescription())
+                    .customStatus(customStatusEntity)
+                    .category(categoryEntity)
+                    .user(ourUsersEntity)
+                    .build();
+            System.out.println("2222222222222222222222");
 //        System.out.println(taskEntity.toString());
-        taskRepo.save(taskEntity);
+            taskRepo.save(taskEntity);
+        }
+
         System.out.println("333333333333333333333333");
 
         TaskDto taskDto2=taskMapper.mapTo(taskEntity);
+
         System.out.println("44444444444444444444444");
         return taskDto2;
     }

@@ -43,10 +43,10 @@ const LoginForm = () => {
 
     return (
         <div style={{maxWidth: '400px', margin: '0 auto', padding: '1rem'}}>
-            <h2>Login</h2>
+
             <form onSubmit={handleSubmit}>
                 <div style={{marginBottom: '1rem'}}>
-                    <label htmlFor="login" style={{display: 'block', marginBottom: '.5rem'}}>Login:</label>
+                    <label htmlFor="login" style={{display: 'block', marginBottom: '.5rem'}}>Email:</label>
                     <input
                         type="text"
                         id="login"

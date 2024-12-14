@@ -1,6 +1,5 @@
 package com.online_shop.usersmanagementsystem.controller;
 
-import com.online_shop.usersmanagementsystem.dto.ProductDto;
 import com.online_shop.usersmanagementsystem.service.AdminService;
 import com.online_shop.usersmanagementsystem.service.AdminUserService;
 import lombok.AllArgsConstructor;
