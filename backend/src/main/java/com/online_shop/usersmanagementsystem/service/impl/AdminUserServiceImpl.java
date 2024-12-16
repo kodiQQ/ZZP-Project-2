@@ -150,27 +150,34 @@ public class AdminUserServiceImpl implements AdminUserService {
 
         try{
 //            TaskEntity taskEntity=taskMapper.mapFrom(taskDto);
-            CustomStatusEntity customStatusEntity=customStatusRepo.getById(taskDto.getCustomStatusId());
+//            CustomStatusEntity customStatusEntity=customStatusRepo.getById(taskDto.getCustomStatusId());
+//            CategoryEntity categoryEntity=categoryRepo.getById(taskDto.getCategoryId());
             CategoryEntity categoryEntity=categoryRepo.getById(taskDto.getCategoryId());
-            TaskEntity taskEntity=TaskEntity.builder()
-                    .id(id)
-                    .title(taskDto.getTitle())
-                    .description(taskDto.getDescription())
-                    .customStatus(customStatusEntity)
-                    .category(categoryEntity)
-                    .user(ourUsersEntity)
-                    .build();
-            TaskEntity temporaryTaskEntity=taskRepo.getById(id);
-            //sprawdzenie czy task należy do usera:
-            if (ourUsersEntity.getId()==temporaryTaskEntity.getUser().getId()){
-                taskRepo.save(taskEntity);
-                currentTaskDto.setStatusCode(200);
-                currentTaskDto.setMessage("Success");
-
+            CustomStatusEntity customStatusEntity=customStatusRepo.getById(taskDto.getCustomStatusId());
+            if(categoryEntity.getUser().getId()!=ourUsersEntity.getId()||customStatusEntity.getUser().getId()!=ourUsersEntity.getId()) {
+                System.out.println("Podano id kategorii lub statusu niewłaściwego usera");
             }else{
-                currentTaskDto.setStatusCode(500);
-                currentTaskDto.setMessage("User has not permissions");
+                TaskEntity taskEntity=TaskEntity.builder()
+                        .id(id)
+                        .title(taskDto.getTitle())
+                        .description(taskDto.getDescription())
+                        .customStatus(customStatusEntity)
+                        .category(categoryEntity)
+                        .user(ourUsersEntity)
+                        .build();
+                TaskEntity temporaryTaskEntity=taskRepo.getById(id);
+                //sprawdzenie czy task należy do usera:
+                if (ourUsersEntity.getId()==temporaryTaskEntity.getUser().getId()){
+                    taskRepo.save(taskEntity);
+                    currentTaskDto.setStatusCode(200);
+                    currentTaskDto.setMessage("Success");
+
+                }else{
+                    currentTaskDto.setStatusCode(500);
+                    currentTaskDto.setMessage("User has not permissions");
+                }
             }
+
         }catch (Exception e){
             currentTaskDto.setStatusCode(500);
             currentTaskDto.setMessage("Error: "+e.getMessage());
